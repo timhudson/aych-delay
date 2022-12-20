@@ -54,7 +54,7 @@ let mut delay = Delay::new(settings);
 The `examples` directory contains a basic example of using Aych-Delay with the `rodio` library to play a sound file with the plugin applied. To run the example, use the following command:
 
 ```bash
-cargo run --example basic
+cargo run --example basic <audio_file>
 ```
 
 ## Filters
