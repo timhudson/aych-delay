@@ -12,7 +12,7 @@ To use Aych-Delay in your Rust project, add the following to your `Cargo.toml` f
 
 ```toml
 [dependencies]
-aych_delay = "0.1.0"
+aych_delay = "0.1.1"
 ```
 
 

@@ -1,6 +1,6 @@
 [package]
 name = "aych-delay"
-version = "0.1.0"
+version = "0.1.1"
 edition = "2021"
 authors = ["Tim Hudson <tim.hudson15@gmail.com>"]
 description = "A delay effect modelled after the H-Delay by Waves"
