@@ -1,4 +1,6 @@
 # Aych-Delay
+[![crates.io](https://img.shields.io/crates/v/aych-delay.svg)](https://crates.io/crates/aych-delay)
+[![docs.rs](https://docs.rs/aych-delay/badge.svg)](https://docs.rs/aych-delay)
 
 Aych-Delay is a delay effect modelled after the H-Delay by Waves. It applies a delay effect to audio data and includes features such as feedback, ping-pong, width control, and lowpass/highpass filtering.
 
