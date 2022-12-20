@@ -1,17 +1,59 @@
+#![warn(missing_docs)]
+
+//! A delay effect modelled after the H-Delay by Waves.
+//!
+//! Example:
+//!
+//! ```rust
+//! use aych_delay::{Delay, Settings};
+//!
+//! let mut delay = Delay::new(Settings {
+//!    delay_time: 166.66,
+//!   feedback: 0.75,
+//!   ..Settings::default()
+//! });
+//!
+//! let input = vec![...];
+//! let mut output = vec![0.0; 512];
+//!
+//! delay.process(&mut input, &mut output);
+//! ```
+//!
+
 mod filters;
 use filters::{Mode, TPTOnePoleStereo};
 
 const SAMPLE_RATE: f32 = 44_100.0;
 
+/// `Settings` contains the parameters for the delay effect.
 pub struct Settings {
+    /// The delay time in milliseconds.
     pub delay_time: f32,
+
+    /// The output level of the delay effect. 1.0 is unity gain.
     pub output_level: f32,
+
+    /// The feedback level of the delay effect (Also known as "decay").
+    /// 0.0 is no feedback, 1.0 is infinite feedback.
     pub feedback: f32,
+
+    /// Whether to use ping-pong delay.
     pub ping_pong: bool,
+
+    /// The width of the delay effect, when ping-pong is enabled.
+    /// 0.0 is mono, 1.0 is full stereo.
     pub width: f32,
+
+    /// Whether to reverse the phase of the delayed signal.
     pub phase_reverse: bool,
+
+    /// The cutoff frequency of the lowpass filter.
     pub lowpass_filter: f64,
+
+    /// The cutoff frequency of the highpass filter.
     pub highpass_filter: f64,
+
+    /// The dry/wet mix of the delay effect.
     pub dry_wet_mix: f32,
 }
 
@@ -38,12 +80,17 @@ struct State {
     highpass_filter: TPTOnePoleStereo,
 }
 
+/// `Delay` is the main struct for the delay effect.
+///
+/// Internally, it maintains a buffer of delayed samples and a set of filters.
 pub struct Delay {
+    /// The current settings for the delay effect.
     pub settings: Settings,
     state: State,
 }
 
 impl Delay {
+    /// Creates a new `Delay` instance with the specified settings.
     pub fn new(settings: Settings) -> Self {
         // Initialize the delay buffer with the specified delay time.
         let delay_buffer_size = (settings.delay_time / 1000.0) * SAMPLE_RATE;
@@ -66,7 +113,7 @@ impl Delay {
         Self { settings, state }
     }
 
-    // Define functions for processing audio data and applying the plugin's effects.
+    /// Processes the input buffer and writes the updated signal to the output buffer.
     pub fn process(&mut self, input: &[f32], output: &mut [f32]) {
         let mut input_index = 0;
         let mut output_index = 0;
