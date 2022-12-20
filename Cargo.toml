@@ -1,0 +1,17 @@
+[package]
+name = "aych-delay"
+version = "0.1.0"
+edition = "2021"
+authors = ["Tim Hudson <tim.hudson15@gmail.com>"]
+description = "A delay effect modelled after the H-Delay by Waves"
+readme = "README.md"
+license = "MIT"
+repository = "https://github.com/timhudson/aych-delay"
+keywords = ["audio", "dsp", "delay", "effect"]
+
+[lib]
+name = "aych_delay"
+
+# Dependencies for our examples
+[dev-dependencies]
+rodio = "0.16.0"
